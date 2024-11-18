@@ -1,0 +1,26 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco13Playground.Web.Controllers.Surfaces
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.FilterPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = null;
+
+	var filterViewModel = new FilterViewModel
+			{
+				Items = new List<string>(), // Empty list for the initial render
+				CurrentPage = 1,
+				TotalPages = 1,
+				Filter = string.Empty
+			};
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter Page</title>
+</head>
+<body>
+	<h1>Filter Page</h1>
+	@await Html.PartialAsync("Partials/FilterForm", filterViewModel)
+</body>
+</html>

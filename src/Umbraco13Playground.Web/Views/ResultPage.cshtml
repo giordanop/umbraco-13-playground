@@ -1,0 +1,39 @@
+﻿@using Umbraco13Playground.Web.Controllers.Surfaces
+@model Umbraco13Playground.Web.Controllers.Surfaces.FilterViewModel
+@{
+	Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter Page</title>
+</head>
+<body>
+	<!-- Results -->
+	<h2>Results:</h2>
+	<ul>
+		@foreach (var item in Model.Items)
+		{
+			<li>@item</li>
+		}
+	</ul>
+
+	<!-- Pagination -->
+	@if (Model.TotalPages > 1)
+	{
+		<div class="pagination">
+			@for (var i = 1; i <= Model.TotalPages; i++)
+			{
+				@using (Html.BeginUmbracoForm<FilterPageController>("FilterResults", FormMethod.Post))
+				{
+					<input type="hidden" name="filter" value="@Model.Filter" />
+					<input type="hidden" name="page" value="@i" />
+					<button type="submit" class="@(i == Model.CurrentPage ? "active" : "")">@i</button>
+				}
+			}
+		</div>
+	}
+</body>
+</html>
