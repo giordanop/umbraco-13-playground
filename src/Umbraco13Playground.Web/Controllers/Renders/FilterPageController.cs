@@ -15,16 +15,26 @@ namespace Umbraco13Playground.Web.Controllers.Renders
 		}
 
 		[HttpGet]
-		public override IActionResult Index()
+		public IActionResult Index(string? slug)
 		{
-			var model = new FilterViewModel
+			if (slug == null)
 			{
-				Items = null,
-				TotalPages = 0,
-				CurrentPage = 1
-			};
+				var model = new FilterViewModel
+				{
+					Items = null,
+					TotalPages = 0,
+					CurrentPage = 1
+				};
+				return CurrentTemplate(model); // This renders the page with the current template
+			}
 
-			return CurrentTemplate(model); // This renders the page with the replaced template
+			var item = Fruits.Items.FirstOrDefault(x => x.Slug == slug);
+			if (item == null)
+			{
+				return NotFound();
+			}
+
+			return View("~/Views/DetailPage.cshtml", item); // This renders the page with the replaced template
 		}
 
 		[HttpPost]
