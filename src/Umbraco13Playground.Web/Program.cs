@@ -7,8 +7,6 @@ builder.CreateUmbracoBuilder()
 	.AddComposers()
 	.Build();
 
-builder.Services.AddControllersWithViews();  // Ensure MVC is added
-
 WebApplication app = builder.Build();
 
 await app.BootUmbracoAsync();

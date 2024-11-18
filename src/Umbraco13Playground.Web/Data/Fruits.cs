@@ -1,4 +1,4 @@
-﻿using Umbraco13Playground.Web.Controllers.Surfaces;
+﻿using Umbraco13Playground.Web.Models;
 
 namespace Umbraco13Playground.Web.Data;
 

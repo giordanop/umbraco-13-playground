@@ -1,11 +1,10 @@
-﻿@using Umbraco13Playground.Web.Controllers.Surfaces
-@model Umbraco13Playground.Web.Controllers.Surfaces.FilterViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Umbraco13Playground.Web.Models.FilterViewModel
 
 
 <!-- Filter Form -->
-@using (Html.BeginUmbracoForm<FilterPageController>("FilterResults", FormMethod.Post))
-{
+<form method="post">
 	<label for="filter">Filter:</label>
 	<input type="text" id="filter" name="filter" value="@Model.Filter" />
 	<button type="submit">Apply Filter</button>
-}
+</form>
