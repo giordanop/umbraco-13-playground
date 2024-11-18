@@ -1,0 +1,28 @@
+﻿@model Umbraco13Playground.Web.Controllers.Surfaces.Item
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>@Model.Name - Detail</title>
+</head>
+<body>
+<h1>@Model.Name</h1>
+
+<!-- Item Description -->
+<p>@Model.Description</p>
+
+<!-- Optional: Add more details here -->
+<div>
+	<strong>Additional Information:</strong>
+	<ul>
+		<li><strong>Slug:</strong> @Model.Slug</li>
+		<li><strong>Id:</strong> @Model.Id</li>
+		<!-- Add more properties if needed -->
+	</ul>
+</div>
+</body>
+</html>

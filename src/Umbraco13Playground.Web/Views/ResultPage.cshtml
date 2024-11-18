@@ -1,4 +1,5 @@
-﻿@using Umbraco13Playground.Web.Controllers.Surfaces
+﻿@using Umbraco13Playground.Web.Controllers
+@using Umbraco13Playground.Web.Controllers.Surfaces
 @model Umbraco13Playground.Web.Controllers.Surfaces.FilterViewModel
 @{
 	Layout = null;
@@ -16,7 +17,11 @@
 	<ul>
 		@foreach (var item in Model.Items)
 		{
-			<li>@item</li>
+			<li>
+				<a href="@Url.Action("Detail", "Item", new { slug = item.Slug })">
+					@item.Name
+				</a>
+			</li>
 		}
 	</ul>
 

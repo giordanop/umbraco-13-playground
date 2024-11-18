@@ -6,30 +6,26 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Web.Website.Controllers;
+using Umbraco13Playground.Web.Data;
 
 namespace Umbraco13Playground.Web.Controllers.Surfaces
 {
 	public class FilterPageController : SurfaceController
 	{
-		public FilterPageController(IUmbracoContextAccessor umbracoContextAccessor, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
+		public FilterPageController(IUmbracoContextAccessor umbracoContextAccessor,
+			IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches,
+			IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor,
+			databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
 		{
 		}
-
-		// Simulated backend data source
-		private readonly List<string> _items = new List<string>
-		{
-			"Apple", "Crabapple", "Pineapple", "Guapple", "Apple Mango", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape",
-			"Honeydew", "Kiwi", "Lemon", "Mango", "Nectarine", "Orange", "Papaya",
-			"Quince", "Raspberry", "Strawberry", "Tangerine", "Ugli Fruit", "Watermelon"
-		};
 
 		[HttpPost]
 		public IActionResult FilterResults(string filter, int page = 1, int pageSize = 2)
 		{
 			// Filter the list
 			var filteredItems = string.IsNullOrWhiteSpace(filter)
-				? _items
-				: _items.Where(x => x.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
+				? Fruits.Items
+				: Fruits.Items.Where(x => x.Name.Contains(filter, StringComparison.OrdinalIgnoreCase)).ToList();
 
 			// Pagination logic
 			var totalItems = filteredItems.Count;
@@ -51,9 +47,17 @@ namespace Umbraco13Playground.Web.Controllers.Surfaces
 	// ViewModel for the filter results
 	public class FilterViewModel
 	{
-		public List<string> Items { get; set; }
+		public List<Item> Items { get; set; }
 		public int CurrentPage { get; set; }
 		public int TotalPages { get; set; }
 		public string Filter { get; set; }
+	}
+
+	public class Item
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Slug { get; set; }
+		public string Description { get; set; }
 	}
 }

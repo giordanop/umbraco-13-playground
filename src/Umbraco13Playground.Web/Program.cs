@@ -1,11 +1,13 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.CreateUmbracoBuilder()
-    .AddBackOffice()
-    .AddWebsite()
-    .AddDeliveryApi()
-    .AddComposers()
-    .Build();
+	.AddBackOffice()
+	.AddWebsite()
+	.AddDeliveryApi()
+	.AddComposers()
+	.Build();
+
+builder.Services.AddControllersWithViews();  // Ensure MVC is added
 
 WebApplication app = builder.Build();
 
@@ -14,15 +16,15 @@ await app.BootUmbracoAsync();
 app.UseHttpsRedirection();
 
 app.UseUmbraco()
-    .WithMiddleware(u =>
-    {
-        u.UseBackOffice();
-        u.UseWebsite();
-    })
-    .WithEndpoints(u =>
-    {
-        u.UseBackOfficeEndpoints();
-        u.UseWebsiteEndpoints();
-    });
+	.WithMiddleware(u =>
+	{
+		u.UseBackOffice();
+		u.UseWebsite();
+	})
+	.WithEndpoints(u =>
+	{
+		u.UseBackOfficeEndpoints();
+		u.UseWebsiteEndpoints();
+	});
 
 await app.RunAsync();

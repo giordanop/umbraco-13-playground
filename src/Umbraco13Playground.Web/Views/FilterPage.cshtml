@@ -1,5 +1,4 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using Umbraco13Playground.Web.Controllers.Surfaces
+﻿@using Umbraco13Playground.Web.Controllers.Surfaces
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.FilterPage>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
@@ -7,7 +6,7 @@
 
 	var filterViewModel = new FilterViewModel
 			{
-				Items = new List<string>(), // Empty list for the initial render
+				Items = new List<Item>(), // Empty list for the initial render
 				CurrentPage = 1,
 				TotalPages = 1,
 				Filter = string.Empty
